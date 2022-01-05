@@ -1,4 +1,5 @@
 import {Action} from "@ngrx/store";
+import {Product} from "../models/product.model";
 
 export enum ProductsActionsTypes{
   /* GET ALL PRODUCTS*/
@@ -15,6 +16,16 @@ export enum ProductsActionsTypes{
   GET_SELECTED_PRODUCTS="[Product] Get Selected products",
   GET_SELECTED_PRODUCTS_SUCCESS="[Product] Get Selected products success",
   GET_SELECTED_PRODUCTS_ERROR="[Product] Get Selected products error",
+
+  /* SEARCH PRODUCTS*/
+  SEARCH_PRODUCTS="[Product] Search products",
+  SEARCH_PRODUCTS_SUCCESS="[Product] Search products success",
+  SEARCH_PRODUCTS_ERROR="[Product] Search products error",
+
+  /* SELECT PRODUCT*/
+  SELECT_PRODUCT="[Products] Select product",
+  SELECT_PRODUCT_SUCCESS="[Products] Select product success",
+  SELECT_PRODUCT_ERROR="[Products] Select product error",
 
 
 }
@@ -70,9 +81,43 @@ export class GetSelectedProductsErrorAction implements Action{
   }
 }
 
+/* SEARCH PRODUCTS ACTIONS*/
+export class SearchProductsAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.SEARCH_PRODUCTS;
+  constructor(public payload:any) {
+  }
+}
+export class SearchProductsSuccessAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.SEARCH_PRODUCTS_SUCCESS;
+  constructor(public payload:any) {
+  }
+}
+export class SearchProductsErrorAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.SEARCH_PRODUCTS_ERROR;
+  constructor(public payload:string) {
+  }
+}
+
+/* SELECT PRODUCT ACTIONS*/
+export class SelectProductAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.SELECT_PRODUCT;
+  constructor(public payload:Product) {
+  }
+}
+export class SelectProductSuccessAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.SELECT_PRODUCT_SUCCESS;
+  constructor(public payload:Product) {
+  }
+}
+export class SelectProductErrorAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.SELECT_PRODUCT_ERROR;
+  constructor(public payload:string) {
+  }
+}
+
 export type ProductsActions=
   GetAllProductsAction | GetAllProductsSuccessAction | GetAllProductsErrorAction
   |GetAvailableProductsAction | GetAvailableProductsSuccessAction | GetAvailableProductsErrorAction
   |GetSelectedProductsAction | GetSelectedProductsSuccessAction | GetSelectedProductsErrorAction
-
+  |SearchProductsAction | SearchProductsSuccessAction | SearchProductsErrorAction
   ;

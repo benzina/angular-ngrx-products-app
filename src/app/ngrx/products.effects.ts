@@ -5,9 +5,15 @@ import {
   GetAllProductsSuccessAction,
   GetAvailableProductsAction,
   GetAvailableProductsErrorAction,
-  GetAvailableProductsSuccessAction, GetSelectedProductsErrorAction, GetSelectedProductsSuccessAction,
+  GetAvailableProductsSuccessAction,
+  GetSelectedProductsErrorAction,
+  GetSelectedProductsSuccessAction,
   ProductsActions,
-  ProductsActionsTypes
+  ProductsActionsTypes,
+  SearchProductsErrorAction,
+  SearchProductsSuccessAction,
+  SelectProductAction,
+  SelectProductErrorAction, SelectProductSuccessAction
 } from "./products.action";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {catchError, map, mergeMap} from "rxjs/operators";
@@ -55,6 +61,34 @@ export class ProductsEffects {
           .pipe(
             map((products)=>new GetSelectedProductsSuccessAction(products)),
             catchError((err)=>of(new GetSelectedProductsErrorAction(err)))
+          )
+      })
+    )
+  );
+
+  /* SEARCH PRODUCTS EFFECT*/
+  SearchProductsEffect:Observable<ProductsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ProductsActionsTypes.SEARCH_PRODUCTS),
+      mergeMap((action:ProductsActions)=>{
+        return this.productService.searchProducts(action.payload)
+          .pipe(
+            map((products)=>new SearchProductsSuccessAction(products)),
+            catchError((err)=>of(new SearchProductsErrorAction(err)))
+          )
+      })
+    )
+  );
+
+  /* SELECT PRODUCT EFFECT*/
+  SelectProductEffect:Observable<ProductsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ProductsActionsTypes.SELECT_PRODUCT),
+      mergeMap((action:ProductsActions)=>{
+        return this.productService.selectProduct(action.payload)
+          .pipe(
+            map((product)=>new SelectProductSuccessAction(product)),
+            catchError((err)=>of(new SelectProductErrorAction(err.message)))
           )
       })
     )
