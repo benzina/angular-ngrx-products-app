@@ -25,26 +25,10 @@
       "available": true
     },
     {
-      "id": 5,
-      "name": "PC Bureau",
-      "price": "877",
-      "quantity": "30",
-      "selected": false,
-      "available": true
-    },
-    {
-      "id": 6,
-      "name": "souris havic",
-      "price": "32",
-      "quantity": "3",
-      "selected": false,
-      "available": false
-    },
-    {
       "name": "cable HDMI",
       "price": "3",
       "quantity": "2",
-      "selected": true,
+      "selected": false,
       "available": true,
       "id": 7
     }

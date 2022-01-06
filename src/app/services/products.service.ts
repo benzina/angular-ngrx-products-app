@@ -31,9 +31,8 @@ export class ProductsService {
     let host=environment.host;
     return this.httpClient.put<Product>(host+"/products/"+product.id,product);
   }
-  deleteProduct(product:Product):Observable<void>{
-    let host=environment.host;
-    return this.httpClient.delete<void>(host+"/products/"+product.id);
+  deleteProduct(id:number):Observable<void>{
+    return this.httpClient.delete<void>(environment.host+"/products/"+id);
   }
   selectProduct(product:Product):Observable<Product>{
     return this.httpClient.put<Product>(environment.host+"/products/"+product.id, {...product,selected:!product.selected});

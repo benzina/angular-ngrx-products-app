@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../../../models/product.model";
 import {Store} from "@ngrx/store";
-import {SearchProductsAction, SelectProductAction} from "../../../../ngrx/products.action";
+import {DeleteProductAction, SearchProductsAction, SelectProductAction} from "../../../../ngrx/products.action";
 
 @Component({
   selector: 'app-product-item',
@@ -18,5 +18,9 @@ export class ProductItemComponent implements OnInit {
 
   onSelect(product: Product) {
     this.store.dispatch(new SelectProductAction(product));
+  }
+
+  onDelete(product: Product) {
+    this.store.dispatch(new DeleteProductAction(product));
   }
 }

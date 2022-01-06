@@ -11,4 +11,9 @@
       <span *ngIf="product.selected">Unselect</span>
     </button>
   </td>
+  <td>
+    <button (click)="onDelete(product)" class="btn btn-danger">
+      <i class="fa fa-trash-o"></i>
+    </button>
+  </td>
 </tr>

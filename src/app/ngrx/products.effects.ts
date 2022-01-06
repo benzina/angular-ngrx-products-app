@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ProductsService} from "../services/products.service";
 import {
+  DeleteProductErrorAction, DeleteProductSuccessAction,
   GetAllProductsErrorAction,
   GetAllProductsSuccessAction,
   GetAvailableProductsAction,
@@ -93,4 +94,19 @@ export class ProductsEffects {
       })
     )
   );
+  /* DELETE PRODUCT EFFECT*/
+  DeleteProductEffect:Observable<ProductsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ProductsActionsTypes.DELETE_PRODUCT),
+      mergeMap((action:ProductsActions)=>{
+        return this.productService.deleteProduct(action.payload.id)
+          .pipe(
+            map(()=>new DeleteProductSuccessAction(action.payload)),
+            catchError((err)=>of(new DeleteProductErrorAction(err.message)))
+          )
+      })
+    )
+  );
+
+
 }
