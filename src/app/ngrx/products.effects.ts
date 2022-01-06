@@ -8,9 +8,9 @@ import {
   GetAvailableProductsErrorAction,
   GetAvailableProductsSuccessAction,
   GetSelectedProductsErrorAction,
-  GetSelectedProductsSuccessAction,
+  GetSelectedProductsSuccessAction, NewProductSuccessAction,
   ProductsActions,
-  ProductsActionsTypes,
+  ProductsActionsTypes, SaveProductErrorAction, SaveProductSuccessAction,
   SearchProductsErrorAction,
   SearchProductsSuccessAction,
   SelectProductAction,
@@ -107,6 +107,31 @@ export class ProductsEffects {
       })
     )
   );
+
+  /* NEW PRODUCT EFFECT*/
+  NewProductEffect:Observable<ProductsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ProductsActionsTypes.NEW_PRODUCT),
+      map((action:ProductsActions)=>{
+        return new NewProductSuccessAction({});
+      })
+    )
+  );
+
+  /* SAVE PRODUCT EFFECT*/
+  SaveProductEffect:Observable<ProductsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ProductsActionsTypes.SAVE_PRODUCT),
+      mergeMap((action:ProductsActions)=>{
+        return this.productService.saveProduct(action.payload)
+          .pipe(
+            map((product)=>new SaveProductSuccessAction(product)),
+            catchError((err)=>of(new SaveProductErrorAction(err.message)))
+          )
+      })
+    )
+  );
+
 
 
 }

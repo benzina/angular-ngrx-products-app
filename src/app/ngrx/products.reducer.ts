@@ -5,7 +5,9 @@ export enum ProductStateEnum{
   LOADING="loading",
   LOADED="loaded",
   ERROR="error",
-  INITIAL="initial"
+  INITIAL="initial",
+  NEW="NEW",
+  UPDATE="UPDATE"
 }
 export interface ProductsState{
   products:Product[],
@@ -71,6 +73,25 @@ export function productsReducer(state:ProductsState=initState,action:Action):Pro
       listProductsDeleted.splice(index,1);
       return {...state,dataState:ProductStateEnum.LOADED,products:listProductsDeleted,}
     case ProductsActionsTypes.DELETE_PRODUCT_ERROR:
+      return {...state,dataState:ProductStateEnum.ERROR,products:(<ProductsActions> action).payload}
+
+    /* NEW PRODUCT REDUCER*/
+    case ProductsActionsTypes.NEW_PRODUCT:
+      return {...state,dataState:ProductStateEnum.LOADING}
+    case ProductsActionsTypes.NEW_PRODUCT_SUCCESS:
+      return {...state,dataState:ProductStateEnum.NEW}
+    case ProductsActionsTypes.NEW_PRODUCT_ERROR:
+      return {...state,dataState:ProductStateEnum.ERROR,products:(<ProductsActions> action).payload}
+
+
+    /* SAVE PRODUCT REDUCER*/
+    case ProductsActionsTypes.SAVE_PRODUCT:
+      return {...state,dataState:ProductStateEnum.LOADING}
+    case ProductsActionsTypes.SAVE_PRODUCT_SUCCESS:
+      let productsSaved:Product[] = [...state.products];
+      productsSaved.push((<ProductsActions> action).payload);
+      return {...state,dataState:ProductStateEnum.LOADED,products:productsSaved}
+    case ProductsActionsTypes.SAVE_PRODUCT_ERROR:
       return {...state,dataState:ProductStateEnum.ERROR,products:(<ProductsActions> action).payload}
 
     default:return {...state}

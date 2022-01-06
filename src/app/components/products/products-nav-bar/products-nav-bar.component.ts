@@ -5,6 +5,7 @@ import {
   GetAvailableProductsAction,
   GetSelectedProductsAction, SearchProductsAction
 } from "../../../ngrx/products.action";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-products-nav-bar',
@@ -13,7 +14,8 @@ import {
 })
 export class ProductsNavBarComponent implements OnInit {
 
-  constructor(private store:Store<any>) { }
+  constructor(private store:Store<any>,
+              private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +25,7 @@ export class ProductsNavBarComponent implements OnInit {
   }
 
   onNewProduct() {
+    this.router.navigateByUrl("newProduct");
   }
 
   onGetAvailableProducts() {

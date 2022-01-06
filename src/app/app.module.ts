@@ -15,6 +15,7 @@ import {ProductsEffects} from "./ngrx/products.effects";
 import { ProductsListComponent } from './components/products/products-list/products-list.component';
 import { ProductItemComponent } from './components/products/products-list/product-item/product-item.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NewProductComponent } from './components/products/new-product/new-product.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ProductsComponent,
     ProductsNavBarComponent,
     ProductsListComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    NewProductComponent
   ],
   imports: [
     BrowserModule,

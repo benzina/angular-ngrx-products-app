@@ -32,6 +32,15 @@ export enum ProductsActionsTypes{
   DELETE_PRODUCT_SUCCESS="[Product] Delete product success",
   DELETE_PRODUCT_ERROR="[Product] Delete product error",
 
+  /* NEW PRODUCT*/
+  NEW_PRODUCT="[Product] New product",
+  NEW_PRODUCT_SUCCESS="[Product] New product success",
+  NEW_PRODUCT_ERROR="[Product] New product error",
+
+  /* SAVE PRODUCT*/
+  SAVE_PRODUCT="[Product] Save product",
+  SAVE_PRODUCT_SUCCESS="[Product] Save product success",
+  SAVE_PRODUCT_ERROR="[Product] Save product error",
 
 }
 
@@ -137,6 +146,42 @@ export class DeleteProductErrorAction implements Action{
   }
 }
 
+/* NEW PRODUCT ACTIONS*/
+export class NewProductAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.NEW_PRODUCT;
+  constructor(public payload:any) {
+  }
+}
+export class NewProductSuccessAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.NEW_PRODUCT_SUCCESS;
+  constructor(public payload:any) {
+  }
+}
+export class NewProductErrorAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.NEW_PRODUCT_ERROR;
+  constructor(public payload:string) {
+  }
+}
+
+
+/* SAVE PRODUCT ACTIONS*/
+export class SaveProductAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.SAVE_PRODUCT;
+  constructor(public payload:Product) {
+  }
+}
+export class SaveProductSuccessAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.SAVE_PRODUCT_SUCCESS;
+  constructor(public payload:Product) {
+  }
+}
+export class SaveProductErrorAction implements Action{
+  type:ProductsActionsTypes=ProductsActionsTypes.SAVE_PRODUCT_ERROR;
+  constructor(public payload:string) {
+  }
+}
+
+
 export type ProductsActions=
   GetAllProductsAction | GetAllProductsSuccessAction | GetAllProductsErrorAction
   |GetAvailableProductsAction | GetAvailableProductsSuccessAction | GetAvailableProductsErrorAction
@@ -144,5 +189,9 @@ export type ProductsActions=
   |SearchProductsAction | SearchProductsSuccessAction | SearchProductsErrorAction
   |SelectProductAction | SelectProductSuccessAction | SelectProductErrorAction
   |DeleteProductAction | DeleteProductSuccessAction | DeleteProductErrorAction
+  |NewProductAction | NewProductSuccessAction | NewProductErrorAction
+  |SaveProductAction | SaveProductSuccessAction | SaveProductErrorAction
+
+
 
   ;
