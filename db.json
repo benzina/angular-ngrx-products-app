@@ -25,20 +25,20 @@
       "available": true
     },
     {
+      "id": 7,
       "name": "cable HDMI",
-      "price": "3",
+      "price": "10",
       "quantity": "2",
       "selected": false,
-      "available": true,
-      "id": 7
+      "available": true
     },
     {
+      "id": 22,
       "name": "test",
       "price": "32",
-      "quantity": "3",
-      "selected": true,
-      "available": true,
-      "id": 22
+      "quantity": "13",
+      "selected": false,
+      "available": true
     },
     {
       "name": "khalid",
@@ -47,6 +47,30 @@
       "selected": true,
       "available": false,
       "id": 24
+    },
+    {
+      "name": "test",
+      "price": "43",
+      "quantity": 0,
+      "selected": true,
+      "available": true,
+      "id": 26
+    },
+    {
+      "name": "test validation",
+      "price": "86.3",
+      "quantity": "32.3",
+      "selected": true,
+      "available": true,
+      "id": 27
+    },
+    {
+      "name": "test pc",
+      "price": "67",
+      "quantity": "3",
+      "selected": true,
+      "available": true,
+      "id": 28
     }
   ]
 }

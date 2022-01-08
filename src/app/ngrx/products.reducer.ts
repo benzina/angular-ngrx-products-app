@@ -7,17 +7,21 @@ export enum ProductStateEnum{
   ERROR="error",
   INITIAL="initial",
   NEW="NEW",
-  UPDATE="UPDATE"
+  EDIT="EDIT",
+  UPDATED="UPDATED"
 }
 export interface ProductsState{
   products:Product[],
   errorMessage:string,
-  dataState:ProductStateEnum
+  dataState:ProductStateEnum,
+  currentProduct:Product|null,
 }
 const initState:ProductsState={
   products:[],
   dataState:ProductStateEnum.INITIAL,
-  errorMessage:""
+  errorMessage:"",
+  currentProduct:null,
+
 }
 export function productsReducer(state:ProductsState=initState,action:Action):ProductsState {
   switch (action.type){
@@ -92,6 +96,24 @@ export function productsReducer(state:ProductsState=initState,action:Action):Pro
       productsSaved.push((<ProductsActions> action).payload);
       return {...state,dataState:ProductStateEnum.LOADED,products:productsSaved}
     case ProductsActionsTypes.SAVE_PRODUCT_ERROR:
+      return {...state,dataState:ProductStateEnum.ERROR,products:(<ProductsActions> action).payload}
+
+    /* EDIT PRODUCT REDUCER*/
+    case ProductsActionsTypes.EDIT_PRODUCT:
+      return {...state,dataState:ProductStateEnum.LOADING}
+    case ProductsActionsTypes.EDIT_PRODUCT_SUCCESS:
+      return {...state,dataState:ProductStateEnum.LOADED,currentProduct:(<ProductsActions>action).payload}
+    case ProductsActionsTypes.EDIT_PRODUCT_ERROR:
+      return {...state,dataState:ProductStateEnum.ERROR,products:(<ProductsActions> action).payload}
+
+    /* UPDATE PRODUCT REDUCER*/
+    case ProductsActionsTypes.UPDATE_PRODUCT:
+      return {...state,dataState:ProductStateEnum.LOADING}
+    case ProductsActionsTypes.UPDATE_PRODUCT_SUCCESS:
+      let updatedProduct:Product=(<ProductsActions>action).payload;
+      let productsUpdated:Product[]=state.products.map(p=>(p.id==updatedProduct.id)?updatedProduct:p);
+      return {...state,dataState:ProductStateEnum.UPDATED,products:productsUpdated}
+    case ProductsActionsTypes.UPDATE_PRODUCT_ERROR:
       return {...state,dataState:ProductStateEnum.ERROR,products:(<ProductsActions> action).payload}
 
     default:return {...state}

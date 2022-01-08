@@ -35,6 +35,8 @@ export class NewProductComponent implements OnInit {
   }
 
   onSaveProduct() {
+    this.submitted=true;
+    if (this.productFormGroup?.invalid) return;
     this.store.dispatch(new SaveProductAction(this.productFormGroup?.value));
   }
 

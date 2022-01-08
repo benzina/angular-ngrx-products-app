@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ProductsService} from "../services/products.service";
 import {
-  DeleteProductErrorAction, DeleteProductSuccessAction,
+  DeleteProductErrorAction, DeleteProductSuccessAction, EditProductErrorAction, EditProductSuccessAction,
   GetAllProductsErrorAction,
   GetAllProductsSuccessAction,
   GetAvailableProductsAction,
@@ -14,7 +14,7 @@ import {
   SearchProductsErrorAction,
   SearchProductsSuccessAction,
   SelectProductAction,
-  SelectProductErrorAction, SelectProductSuccessAction
+  SelectProductErrorAction, SelectProductSuccessAction, UpdateProductErrorAction, UpdateProductSuccessAction
 } from "./products.action";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {catchError, map, mergeMap} from "rxjs/operators";
@@ -132,6 +132,32 @@ export class ProductsEffects {
     )
   );
 
+  /* EDIT PRODUCT EFFECT*/
+  EditProductEffect:Observable<ProductsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ProductsActionsTypes.EDIT_PRODUCT),
+      mergeMap((action:ProductsActions)=>{
+        return this.productService.getProductById(action.payload)
+          .pipe(
+            map((product)=>new EditProductSuccessAction(product)),
+            catchError((err)=>of(new EditProductErrorAction(err.message)))
+          )
+      })
+    )
+  );
 
+  /* UPDATE PRODUCT EFFECT*/
+  UpdateProductEffect:Observable<ProductsActions>=createEffect(
+    ()=>this.effectActions.pipe(
+      ofType(ProductsActionsTypes.UPDATE_PRODUCT),
+      mergeMap((action:ProductsActions)=>{
+        return this.productService.updateProduct(action.payload)
+          .pipe(
+            map((product)=>new UpdateProductSuccessAction(product)),
+            catchError((err)=>of(new UpdateProductErrorAction(err.message)))
+          )
+      })
+    )
+  );
 
 }
