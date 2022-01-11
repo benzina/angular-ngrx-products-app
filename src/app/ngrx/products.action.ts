@@ -52,6 +52,8 @@ export enum ProductsActionsTypes{
   UPDATE_PRODUCT_SUCCESS="[Product] Update product success",
   UPDATE_PRODUCT_ERROR="[Product] Update product error",
 
+  
+
 }
 
 /* GET ALL PRODUCTS ACTIONS*/

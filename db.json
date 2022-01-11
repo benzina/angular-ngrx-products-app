@@ -6,7 +6,7 @@
       "price": 21000,
       "quantity": 89,
       "available": true,
-      "selected": true
+      "selected": false
     },
     {
       "id": 3,
@@ -14,7 +14,7 @@
       "price": 100,
       "quantity": 60,
       "available": true,
-      "selected": true
+      "selected": false
     },
     {
       "id": 4,
@@ -44,7 +44,7 @@
       "name": "khalid",
       "price": "67",
       "quantity": "5",
-      "selected": true,
+      "selected": false,
       "available": false,
       "id": 24
     },
@@ -57,17 +57,17 @@
       "id": 26
     },
     {
+      "id": 27,
       "name": "test validation",
       "price": "86.3",
       "quantity": "32.3",
       "selected": true,
-      "available": true,
-      "id": 27
+      "available": false
     },
     {
-      "name": "test pc",
-      "price": "67",
-      "quantity": "3",
+      "name": "zxzx",
+      "price": 0,
+      "quantity": 0,
       "selected": true,
       "available": true,
       "id": 28

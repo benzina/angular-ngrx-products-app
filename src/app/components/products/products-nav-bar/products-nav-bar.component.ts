@@ -3,9 +3,10 @@ import {Store} from "@ngrx/store";
 import {
   GetAllProductsAction,
   GetAvailableProductsAction,
-  GetSelectedProductsAction, SearchProductsAction
+  GetSelectedProductsAction, ProductsActionsTypes, SearchProductsAction
 } from "../../../ngrx/products.action";
 import {Router} from "@angular/router";
+import {ProductsState} from "../../../ngrx/products.reducer";
 
 @Component({
   selector: 'app-products-nav-bar',
@@ -13,11 +14,16 @@ import {Router} from "@angular/router";
   styleUrls: ['./products-nav-bar.component.css']
 })
 export class ProductsNavBarComponent implements OnInit {
+  state:ProductsState|null=null;
+  readonly ProductsActionsTypes=ProductsActionsTypes;
 
   constructor(private store:Store<any>,
               private router:Router) { }
 
   ngOnInit(): void {
+    this.store.subscribe(state=>{
+      this.state=state.productsState;
+    });
   }
 
   onGetAllProducts() {
@@ -25,7 +31,7 @@ export class ProductsNavBarComponent implements OnInit {
   }
 
   onNewProduct() {
-    this.router.navigateByUrl("newProduct");
+    this.router.navigateByUrl("/newProduct");
   }
 
   onGetAvailableProducts() {
